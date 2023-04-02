@@ -1,0 +1,24 @@
+{
+  "manifest_version": 2,
+  "name": "Image Extractor",
+  "version": "1.0",
+  "description": "Extracts image names and allows copying image URLs.",
+  "icons": {
+    "48": "icon.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "browser_action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "48": "icon.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["contentScript.js"]
+    }
+  ]
+}

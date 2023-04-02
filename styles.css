@@ -1,0 +1,92 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 600;
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 15px;
+  margin: 0;
+}
+
+button {
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  margin: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#imageList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.imageItem {
+	  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  margin-bottom: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.imageItem:hover {
+  background-color: #f1f1f1;
+}
+
+.altText {
+	  margin-right: 10px;
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+}
+
+.downloadIcon {
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 8px;
+}
+/* Add the following CSS rule at the end of the file */
+#downloadAllButton {
+  display: none;
+}
+.copyIcon {
+  cursor: pointer;
+  font-size: 18px;
+  margin-left: 8px;
+}
+li {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+.imagePreview {
+  margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+}
