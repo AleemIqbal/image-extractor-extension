@@ -5,7 +5,7 @@ document.getElementById('downloadAllButton').addEventListener('click', async () 
 
     for (const li of imageList) {
         const imageUrl = li.querySelector('.imageItem').title;
-        const imageName = li.querySelector('.imageItem').textContent;
+        const imageName = li.querySelector('.imageItem').textContent.replace(/\?.*/, '');
         try {
             const response = await fetch(imageUrl);
             const data = await response.blob();
@@ -42,11 +42,11 @@ port.onMessage.addListener((msg) => {
             imgPreview.classList.add('imagePreview');
 
             const imgName = document.createElement('div');
-            imgName.textContent = img.name;
+            imgName.textContent = img.name.replace(/\?.*/, '');
             imgName.title = img.src;
             imgName.classList.add('imageItem');
             imgName.addEventListener('click', () => {
-                navigator.clipboard.writeText(img.name).then(() => {
+                navigator.clipboard.writeText(img.name.replace(/\?.*/, '')).then(() => {
                     console.log('Image file name copied to clipboard');
                 }, (error) => {
                     console.error('Failed to copy image file name', error);
@@ -69,7 +69,7 @@ port.onMessage.addListener((msg) => {
             downloadIcon.addEventListener('click', () => {
                 const link = document.createElement('a');
                 link.href = img.src;
-                link.download = img.name;
+                link.download = img.name.replace(/\?.*/, '');
                 link.click();
             });
 
@@ -100,6 +100,7 @@ port.onMessage.addListener((msg) => {
 port.onDisconnect.addListener(() => {
     console.log('Port disconnected');
 });
+
 
 chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     setTimeout(() => {
