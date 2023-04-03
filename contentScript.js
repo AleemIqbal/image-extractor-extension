@@ -10,6 +10,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       };
     });
     sendResponse({ imageData });
+  } else if (request.message === 'get_images') {
+    sendResponse({ imageData: extractImages() });
   }
-  return true;
 });
