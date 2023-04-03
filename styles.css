@@ -4,6 +4,8 @@ body {
   background-color: #f5f5f5;
   margin: 0;
   padding: 0;
+      width: 376px;
+    max-height: 583px;
 }
 
 h1 {
@@ -39,7 +41,6 @@ button:hover {
 }
 
 .imageItem {
-	  margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -50,6 +51,7 @@ button:hover {
   margin-bottom: 4px;
   border-radius: 4px;
   transition: background-color 0.2s;
+  word-break: break-word;
 }
 
 .imageItem:hover {
@@ -57,36 +59,55 @@ button:hover {
 }
 
 .altText {
-	  margin-right: 10px;
   font-size: 12px;
   color: #888;
   margin-top: 4px;
+  word-break: break-word;
 }
 
 .downloadIcon {
   cursor: pointer;
   font-size: 18px;
-  margin-left: 8px;
 }
-/* Add the following CSS rule at the end of the file */
-#downloadAllButton {
-  display: none;
-}
+
 .copyIcon {
   cursor: pointer;
   font-size: 18px;
-  margin-left: 8px;
 }
+
+#downloadAllButton {
+  display: none;
+}
+
 li {
   display: flex;
   align-items: center;
   padding: 10px;
   border-bottom: 1px solid #ccc;
+  width: 100%;
+  min-height: 80px;
 }
+
 .imagePreview {
   margin-right: 10px;
   width: 60px;
   height: 60px;
   object-fit: cover;
   border-radius: 4px;
+  flex: 0 0 60px; /* Width is set to 60px */
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  flex: 0 0 240px; /* Width is set to 240px */
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 60px; /* Width is set to 60px */
 }

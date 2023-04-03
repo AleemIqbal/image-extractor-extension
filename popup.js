@@ -26,7 +26,6 @@ document.getElementById('downloadAllButton').addEventListener('click', async () 
     });
 });
 
-
 const port = chrome.runtime.connect({ name: 'popup' });
 
 port.onMessage.addListener((msg) => {
@@ -46,10 +45,22 @@ port.onMessage.addListener((msg) => {
             imgName.textContent = img.name;
             imgName.title = img.src;
             imgName.classList.add('imageItem');
+            imgName.addEventListener('click', () => {
+                navigator.clipboard.writeText(img.name).then(() => {
+                    console.log('Image file name copied to clipboard');
+                }, (error) => {
+                    console.error('Failed to copy image file name', error);
+                });
+            });
 
             const altText = document.createElement('div');
             altText.textContent = `Alt: ${img.alt}`;
             altText.classList.add('altText');
+
+            const infoContainer = document.createElement('div');
+            infoContainer.classList.add('infoContainer');
+            infoContainer.appendChild(imgName);
+            infoContainer.appendChild(altText);
 
             const downloadIcon = document.createElement('span');
             downloadIcon.classList.add('downloadIcon');
@@ -61,12 +72,6 @@ port.onMessage.addListener((msg) => {
                 link.download = img.name;
                 link.click();
             });
-
-            li.appendChild(imgPreview);
-            li.appendChild(imgName);
-            li.appendChild(altText);
-            li.appendChild(downloadIcon);
-            imageList.appendChild(li);
 
             const copyIcon = document.createElement('span');
             copyIcon.classList.add('copyIcon');
@@ -80,7 +85,15 @@ port.onMessage.addListener((msg) => {
                 });
             });
 
-            li.appendChild(copyIcon);
+            const iconContainer = document.createElement('div');
+            iconContainer.classList.add('iconContainer');
+            iconContainer.appendChild(downloadIcon);
+            iconContainer.appendChild(copyIcon);
+
+            li.appendChild(imgPreview);
+            li.appendChild(infoContainer);
+            li.appendChild(iconContainer);
+            imageList.appendChild(li);
         });
     }
 });
