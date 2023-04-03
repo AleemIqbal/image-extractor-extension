@@ -1,3 +1,10 @@
+function scrollToImage(imgElement) {
+  imgElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  imgElement.style.border = '2px solid #4CAF50';
+  setTimeout(() => {
+    imgElement.style.border = '';
+  }, 2000);
+}
 document.getElementById('downloadAllButton').addEventListener('click', async () => {
     const zip = new JSZip();
     const imageList = document.getElementById('imageList').children;
@@ -84,11 +91,22 @@ port.onMessage.addListener((msg) => {
                     console.error('Failed to copy image URL', error);
                 });
             });
+			
+			const scrollToIcon = document.createElement('span');
+			scrollToIcon.classList.add('scrollToIcon');
+			scrollToIcon.textContent = '🔎';
+			scrollToIcon.title = 'Scroll to image';
+			scrollToIcon.addEventListener('click', () => {
+				chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+					chrome.tabs.sendMessage(tabs[0].id, { message: 'scroll_to_image', src: img.src });
+				});
+			});
 
             const iconContainer = document.createElement('div');
             iconContainer.classList.add('iconContainer');
             iconContainer.appendChild(downloadIcon);
-            iconContainer.appendChild(copyIcon);
+			iconContainer.appendChild(copyIcon);
+			iconContainer.appendChild(scrollToIcon);
 
             li.appendChild(imgPreview);
             li.appendChild(infoContainer);

@@ -29,7 +29,10 @@ button {
   cursor: pointer;
   outline: none;
 }
-
+.scrollToIcon {
+  cursor: pointer;
+  font-size: 18px;
+}
 button:hover {
   background-color: #45a049;
 }

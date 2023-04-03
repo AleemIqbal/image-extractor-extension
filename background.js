@@ -20,9 +20,15 @@ chrome.runtime.onConnect.addListener((port) => {
         port.postMessage({ message: 'image_data', imageData: imageDataCache[tabId] });
       } else {
         chrome.tabs.sendMessage(tabId, { message: 'extract_images' }, (response) => {
-          imageDataCache[tabId] = response.imageData;
-          port.postMessage({ message: 'image_data', imageData: response.imageData });
-        });
+		  if (chrome.runtime.lastError) {
+			console.error(chrome.runtime.lastError.message);
+		  } else if (response && response.imageData) {
+			imageDataCache[tabId] = response.imageData;
+			port.postMessage({ message: 'image_data', imageData: response.imageData });
+		  } else {
+			console.error('Unexpected response:', response);
+		  }
+		});
       }
     }
   });
