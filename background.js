@@ -2,7 +2,8 @@ let imageDataCache = {};
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === 'store_images') {
-    imageDataCache[sender.tab.id] = request.imageData;
+    const filteredImageData = request.imageData.filter((img) => !img.src.endsWith('.svg') && !img.src.startsWith('data:image/svg+xml'));
+    imageDataCache[sender.tab.id] = filteredImageData;
   }
 });
 
